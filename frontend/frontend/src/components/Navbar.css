@@ -1,0 +1,213 @@
+/* ===========================
+   NAVBAR
+=========================== */
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 16px 8%;
+
+  background: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(12px);
+
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+/* LOGO */
+
+.logo a {
+  text-decoration: none;
+  color: white;
+
+  font-size: 28px;
+  font-weight: 700;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo span {
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: linear-gradient(135deg,#7c3aed,#2563eb);
+
+  color: white;
+  font-weight: bold;
+}
+
+/* CENTER MENU */
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 35px;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+
+  font-size: 17px;
+  font-weight: 500;
+
+  transition: .3s;
+  position: relative;
+}
+
+.nav-links a:hover {
+  color: #60a5fa;
+}
+
+.nav-links a::after {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  bottom: -8px;
+
+  width: 0;
+  height: 2px;
+
+  background: #60a5fa;
+
+  transition: .3s;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* RIGHT BUTTONS */
+
+.nav-buttons {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.login-btn,
+.register-btn {
+
+  padding: 10px 22px;
+
+  border-radius: 8px;
+
+  text-decoration: none;
+
+  font-weight: 600;
+
+  transition: .3s;
+}
+
+.login-btn {
+
+  border: 2px solid #7c3aed;
+
+  color: white;
+
+}
+
+.login-btn:hover {
+
+  background: #7c3aed;
+
+}
+
+.register-btn {
+
+  background: linear-gradient(
+      135deg,
+      #7c3aed,
+      #2563eb
+  );
+
+  color: white;
+
+}
+
+.register-btn:hover {
+
+  transform: translateY(-2px);
+
+  box-shadow: 0 10px 20px rgba(0,0,0,.25);
+
+}
+
+/* HAMBURGER */
+
+.hamburger {
+
+  display: none;
+
+  color: white;
+
+  font-size: 30px;
+
+  cursor: pointer;
+
+}
+
+/* MOBILE */
+
+@media (max-width:900px){
+
+.nav-links{
+
+position:absolute;
+
+top:75px;
+
+left:0;
+
+width:100%;
+
+background:#0f172a;
+
+flex-direction:column;
+
+padding:30px;
+
+display:none;
+
+}
+
+.nav-links.active{
+
+display:flex;
+
+}
+
+.nav-buttons{
+
+display:none;
+
+}
+
+.hamburger{
+
+display:block;
+
+}
+
+.logo a{
+
+font-size:22px;
+
+}
+
+}
