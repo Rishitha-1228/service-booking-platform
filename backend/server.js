@@ -3,19 +3,58 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const compression = require("compression");
+const helmet = require("helmet");
+const rateLimit = require("express-rate-limit");
+const xss = require("xss-clean");
 
 dotenv.config();
 
 const app = express();
 
 /* ============================
+   TRUST PROXY (Render)
+============================ */
+
+app.set("trust proxy", 1);
+
+/* ============================
    MIDDLEWARE
 ============================ */
 
-app.use(cors());
-app.use(express.json());
+// CORS
+app.use(
+  cors({
+    origin: "*",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
+
+// Security Headers
+app.use(
+  helmet({
+    crossOriginResourcePolicy: false,
+  })
+);
+
+// Compression
 app.use(compression());
+
+// Body Parser
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// XSS Protection
+app.use(xss());
+
+// Rate Limiting
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100,
+  message: "Too many requests. Please try again later.",
+});
+
+app.use(limiter);
 
 /* ============================
    DATABASE CONNECTION
@@ -35,57 +74,38 @@ mongoose
    API ROUTES
 ============================ */
 
-// Authentication
-app.use(
-  "/api/auth",
-  require("./routes/authRoutes")
-);
+app.use("/api/auth", require("./routes/authRoutes"));
 
-// Services
-app.use(
-  "/api/services",
-  require("./routes/serviceRoutes")
-);
+app.use("/api/services", require("./routes/serviceRoutes"));
 
-// Bookings
-app.use(
-  "/api/bookings",
-  require("./routes/bookingRoutes")
-);
+app.use("/api/bookings", require("./routes/bookingRoutes"));
 
-// Payments
-app.use(
-  "/api/payments",
-  require("./routes/paymentRoutes")
-);
+app.use("/api/payments", require("./routes/paymentRoutes"));
 
-// Notifications
-app.use(
-  "/api/notifications",
-  require("./routes/notificationRoutes")
-);
+app.use("/api/notifications", require("./routes/notificationRoutes"));
 
-// Admin
-app.use(
-  "/api/admin",
-  require("./routes/adminRoutes")
-);
+app.use("/api/admin", require("./routes/adminRoutes"));
 
 /* ============================
-   TEST ROUTES
+   HOME ROUTE
 ============================ */
 
 app.get("/", (req, res) => {
   res.json({
     success: true,
     project: "Service Booking Platform",
-    version: "Week 8",
+    version: "Week 9",
     status: "Server Running Successfully 🚀",
   });
 });
 
+/* ============================
+   HEALTH CHECK
+============================ */
+
 app.get("/health", (req, res) => {
   res.json({
+    success: true,
     status: "OK",
     database: "Connected",
     server: "Running",
@@ -109,7 +129,7 @@ app.use((req, res) => {
 ============================ */
 
 app.use((err, req, res, next) => {
-  console.log(err);
+  console.error(err);
 
   res.status(500).json({
     success: false,
@@ -127,6 +147,9 @@ app.listen(PORT, () => {
   console.log("=====================================");
   console.log("🚀 Service Booking Platform");
   console.log(`🌍 Server : http://localhost:${PORT}`);
-  console.log("📦 Environment :", process.env.NODE_ENV || "development");
+  console.log(
+    "📦 Environment :",
+    process.env.NODE_ENV || "development"
+  );
   console.log("=====================================");
 });

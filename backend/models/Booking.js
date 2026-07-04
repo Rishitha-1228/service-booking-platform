@@ -112,7 +112,10 @@ bookingSchema.pre("save", function (next) {
 
   next();
 });
-
+bookingSchema.index({ email: 1 });
+bookingSchema.index({ bookingStatus: 1 });
+bookingSchema.index({ paymentStatus: 1 });
+bookingSchema.index({ bookingDate: 1 });
 module.exports = mongoose.model(
   "Booking",
   bookingSchema

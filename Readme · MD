@@ -1,0 +1,148 @@
+# Service Booking Platform (Week 9)
+
+## Overview
+
+The Service Booking Platform is a full-stack MERN (MongoDB, Express, React, Node.js) application that allows users to browse professional services, create bookings, make demo payments, and receive email/SMS notifications. It includes a customer dashboard, an admin dashboard, and Week 9 performance and security optimizations.
+
+## Features
+
+- User Registration & Login
+- Professional Service Listing
+- Service Booking
+- Customer Dashboard
+- Admin Dashboard
+- Payment Integration (Demo)
+- Email Notifications
+- SMS Notifications
+- Performance Optimization
+- Security Enhancements
+
+## Tech Stack
+
+- React.js
+- Node.js
+- Express.js
+- MongoDB
+- Mongoose
+- Axios
+- Nodemailer
+- Twilio
+- Vercel (frontend hosting)
+- Render (backend hosting)
+
+## Installation
+
+```bash
+git clone <repository-url>
+cd service-booking-platform
+npm install
+```
+
+### Backend
+
+```bash
+cd backend
+npm install
+npm start
+```
+
+### Frontend
+
+```bash
+cd frontend/frontend
+npm install
+npm run dev
+```
+
+## Environment Variables
+
+Create a `.env` file in the backend directory with the following variables:
+
+```
+MONGO_URI=
+JWT_SECRET=
+EMAIL_USER=
+EMAIL_PASS=
+TWILIO_SID=
+TWILIO_AUTH_TOKEN=
+TWILIO_PHONE=
+```
+
+## Project Structure
+
+```
+service-booking-platform/
+├── backend/
+│   ├── controllers/
+│   ├── models/
+│   ├── routes/
+│   ├── middleware/
+│   └── server.js
+├── frontend/
+│   └── frontend/
+│       ├── src/
+│       │   ├── components/
+│       │   ├── pages/
+│       │   └── App.jsx
+│       └── package.json
+├── README.md
+├── Performance_Optimization_Report.docx
+├── Security_Audit_Report.docx
+└── Test_Cases.docx
+```
+
+## API Endpoints
+
+| Method | Endpoint | Description |
+|---|---|---|
+| POST | /api/auth/register | Register a new user |
+| POST | /api/auth/login | User login |
+| GET | /api/services | Get all services |
+| POST | /api/bookings | Create booking |
+| GET | /api/bookings | Get all bookings |
+| POST | /api/payments/create-order | Create demo payment order |
+| POST | /api/payments/verify | Verify payment |
+| GET | /health | Server health check |
+
+## Performance Optimizations
+
+- React Lazy Loading (`React.lazy` + `Suspense`)
+- `React.memo` to prevent unnecessary re-renders
+- `useMemo` to cache computed values
+- `useCallback` to prevent unnecessary function recreation
+- Backend caching with `node-cache`
+- MongoDB `.lean()` queries for faster execution
+- MongoDB indexes for improved search performance
+- Compression middleware to reduce API response size
+
+## Security Features
+
+- Helmet for secure HTTP headers
+- CORS to restrict cross-origin requests
+- Rate limiting to prevent abuse
+- XSS protection
+- JWT authentication
+- Password hashing with bcrypt
+- Environment variables for sensitive credentials
+- MongoDB Atlas with secured network access
+- HTTPS deployment on Render & Vercel
+
+## Screenshots
+
+*(Add screenshots of the homepage, dashboard, and booking flow here.)*
+
+## Deployment Links
+
+- **GitHub Repository:** https://github.com/Rishitha-1228/service-booking-platform
+- **Frontend (Vercel):** https://your-project.vercel.app
+- **Backend (Render):** https://week7-if5e.onrender.com
+
+## Author
+
+Kaluvala Rishitha
+B.Tech Computer Science Engineering
+Vignan's Institute of Management and Technology for Women
+
+## License
+
+This project was developed for educational purposes as part of the Full Stack Development Internship (Week 9).
