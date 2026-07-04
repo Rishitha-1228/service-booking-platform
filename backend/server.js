@@ -5,7 +5,7 @@ const dotenv = require("dotenv");
 const compression = require("compression");
 const helmet = require("helmet");
 const rateLimit = require("express-rate-limit");
-const xss = require("xss-clean");
+//const xss = require("xss-clean");
 
 dotenv.config();
 
@@ -45,7 +45,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // XSS Protection
-app.use(xss());
+//app.use(xss());
 
 // Rate Limiting
 const limiter = rateLimit({
